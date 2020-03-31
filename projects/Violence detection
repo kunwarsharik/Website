@@ -1,0 +1,19 @@
+Introduction
+Detection of Riots/Violence from Live videos
+Almost every part of the world today is facing problem of violence in some kind or the other. In many countries violence is directed towards minorities restricting their freedom. Problem is with authority which do not get information regarding violence spread. Hence we propose a Solution using which we can automatically detect where the violence is happening and take appropriate steps.
+
+Novelty and Problems Solved
+Among 5 methods to approach the video based detection, in this project we used 3 dimensional Convolutional networks. We used the end to end training strategy to obtain a classifier that can generalize the action of violence like one person or a group of peoples attacking another person or other peoples. The method was found to work good and gave accuracy of 90% and higher on various datasets.
+The Dataset used in this is obtained from kaggle, the dataset is publically available with the name real life violence detection. No work yet was found to be done on this dataset till date i am writing this post. There were 2000 videos 1000 that contain violence and 1000 that don't contain violence. Among these some videos are extremely lengthy we removed those videos from dataset remaing videos were 998 from violence and 999 from non violence totalling upto 1997 videos.
+The main problem was to choose the depth for images in 3 dimensional CNN. Since these 3d dataset consume lot of memory. Our system is 25GB Ram yet we can't take image in all 3 channel. When we were normalising the image the memory outrun quickly. So we  converted RGB images into Greyscale images.And also the size of images was reduced from (224,224,3) to (150,150,1). Each video had different length ranging from 3 sec to 600 second. But generally video were of duration 3 sec to 10 sec. Also the video have fighting in random locations. So we decided to take video at regular interval of 2,3 or 4 seconds. When it was decided that we will have depth equal to 60 depending on amount of data in the dataset. We thought to also take advantage that longer video provide that is more data. we divided number of frames in video by 2, 3,and 4. whichever resulting number is close to 60 we chose that as the interval between each frame we take from video. Example if we have 130 frames, we divide it by 2 (that is take 1 frame gap)which is near 60 compared to others. if we had 170 frames we would have used 2 frames gap. To fulfill 60 frames for the remaining frames black padding as frame is added. Resulting is grey image sequence with 60 frames each of size 150x150.
+Due to small training data the only a small portion of 15% is used as test data. The data is also not much for training so we tried to keep as less trainable parameters in CNN as possible. To find such a model is also challanging which is both small work best for the problem. This is solved by try and test method, and finally an optimal model is obtained.
+
+Contribution
+Till now this project under work. But at present also the baseline model we created using 3Dimensinal CNN which is further optimised using trial and test is also pretty good for this problem.    
+
+Usefulness 
+At current stage This model can detect the violence scene with accuracy of above 90.0%. Hence can be used in automated violence detection. The thing which makes it useful is also that there are no such model for detection of violence.
+
+Limitation and Ongoing Work
+Apart from video audio is also very important to detect if someone is threatning somebody. Some times just video is not enough.
+We want to evolve it to detect and understand what exactly leads to fights and violence. We hope such information will be of immense use.

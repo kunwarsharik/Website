@@ -1,0 +1,22 @@
+Using "ALL" smartphones as Remote for electronic devices
+
+Problem arrised when Companies start to place IR blasters in some smartphones.IR blaster is the component which creates the IR signal that remotes(like TV remote) produce. There are smartphones both at higher end and lower end ( LG L90, LG L90 Dual, Xolo 2100, Xiaomi Mi4) which could be having IR blaster. Starting then peoples those who don't have such smartphone are at regular disadvantage. Especially in conference halls, class rooms where remote for Air Conditioners and projectors etc are never to be found when needed. Besided it would be very user friendly if he can operate different devices with phone without any specific component like the IR blaster. So we created a microcontroller based, very less costly option. As a Universal "universal remote". 
+
+How Current IR blaster based smartphone work?
+Smartphone Use an App like "ZaZa Remote" or "Mi Remote controller". These apps used to have only specific type of remote options. For the Options it have, the control instructions were already set to use that is For Example if you use mi remote controller for say decreasing temperature on your Samsung Air Conditioner and push button in your smartphone, corresponding to that button an IR signal which is already noted there as control instruction for this button will be send to IR blaster. And from IR blaster the Infrared is generated and reach the Air Conditioner IR sensor.
+
+How we did it for those smartphone which Don't have IR sensor? We Connected smartphone to microcontroller using Wireless module. The smartphone have buttons for different operations specific to the device you want to control. the button you press instruct the microcontroler. Now Microcontroller have control instructions and iterpret the signal from pressed button to corresponding IR signal instruction. This IR signal instruction is then sent to IR signal generator(an IR LED) like you have in your traditional remotes using which IR signal is generated.
+
+Why this is Better?
+More Controll to owner
+Every phone has wifi. But the percentage of smartphones with IR blaster in market today is not more than handful. Of course if remote is not their or due to some reason someone don't want to give remote to you, which may be due to misusing etc, you can't control the device though you have it. Using microcontroller based aproach the owner can set limitation like the students in class can not decrease temperature of Air Conditioner below 19 degree or they can't turn off some of the lights etc. This give owner more control due to which he can provide maximum allowed freedom to user at his place.
+More convinience to User
+Convinience is highly increased because where ever you are just see all devices you are allowed to control and whenever required use your simple smartphone phone for controlling. You don't need to ask for any remote.
+No Extra Component in user's smartphone required.
+
+Usefulness
+Highly useful for classrooms, confrence rooms, Laboratories etc.
+In the automation same microcontroller can also be used for various other operations too. 
+
+Limitation and Future work
+Price at first appear to be high (INR 800). but the arduino uno used can be used for other operations too while it's price is added only once. But still on cost aspect we can do better. 

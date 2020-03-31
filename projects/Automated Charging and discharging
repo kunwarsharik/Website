@@ -1,0 +1,25 @@
+Programmable Charger
+In many researches on battery life it is found that you must not fully discharge your battery and also must not fully charge it both reduce battery life. Many devices like laptop and smartphone have batteries and require charging and most people plug their phones and laptops for chraging at night and leave them to charge overnight. This causes battery to lose charge holding capacity, and soon battery became useless often requiring charging again and again after short period of time. With this project we solved this problem by inventing a programable charger.
+
+How current chargers work?
+Current chargers are simple when you plug in an electricity socket they supply energy to your battery. There is 'tickle charge' mechanism which if you keep your phone plugged in overnight or after the charging is 100% it disconnect charging and once charging fall below a limit it again start charging this keeping of charging close to full is harmful for our battery as it has fixed number of 'charge cycles'. Also internally some mechanisms are built in high quality phones which do not charge battery completely still they charge in "nearly" full. Also with fast charging option the heating is issue and with most high end phones it is an issue.
+
+Our Device
+I myself work in deep learning. There are many times when i am training a model and take days to train. If it would have been just for couple of nights i would not pay much attension but since this is everyday stuff, i needed to create something that could prevent my laptop battery from getting Dead soon. After consulting from various literature sources i came to know the optimal charger and battery relation. According to this relation one must only charge battery between 45-55% which is best, expand this range little bit to 40-70% when required but try to avoid it as much as possible. And never discharge below 30% and never charge above 80%. Also it is best when battery is going below 25% don't use phone on energy efficient mode it is better to switch it off. Also the best way of charging is not charging in one go. If possible chrage in steps.
+Doing all of above things is pretty hard for a working person. So why not use our device. It connects with our system and can work in manual as well as in the way we tell it. We can plan when should our battery charge giving time or remaining battery percentage. So when say our model is training and we left our model train overnight we can set to on charger when battery go below 46% and stop charging when above 55%.
+Not only Charging laptops and smartphones but also we can use this to on and off devices on previously planed times. 
+
+How our new chargers would be working?
+It utilize a microcontroler like arduino and a wireless module to communicate with our computer. Using same connection we send instructions to microcontroler. Microcontroller breaks curcuit to our charger preventing electricity flow and reconnect it when instruction for connecting is executed. Charger will be of phone or laptop that you already have and you will plug it into our device. So there is no problem of third party charger many people fear. Similarly other Electronic gadgets could be operated on planed time.
+
+Usefulnes
+Though not much but still saves electricity.
+keep Li ion battery in best condition for longest time possible.
+Heating can also be prevented if planned to charge in steps and not at once. 
+
+Also students generally train bigger model which require overnight laptop usage, in all cases like this where we need laptop smartphone to operate long time without our supervision on its charging is can be used there.
+Similarly when we sleep  with fan/coolers or Air Conditioner on these devices can also be programmed to operate on previously planned time. This is useful and we won't get too cold or won't feel too hot at night. Or use to start and turn of water motor to fill tank or to start water heater before you wake up so you can have water heated already when you wake up.
+
+Future Work
+Reducing cost of production will be priority. Insted of compllete microcontroler custom made IC could be used.
+Machine learning could be used to obtain better predicting between manual and programed mode.

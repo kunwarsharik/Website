@@ -1,0 +1,31 @@
+Introduction
+An optimal vision based Xtended Derailment System
+
+Railway cheapest mode of transportation in many countries. This is Second part in our railway accident prevention effort. Due to harsh weather and also over the course of time the railway tracks become damaged. Earlier we tried to prevent accidents only due to Buckling and hogging. 
+
+Novelty and problems overcomed
+Till now only researches conducted in field of computer vision to detect the defect on railway track is limited to detecting corrugation on railway track, detecting cracks, insufficient gravel on the track etc. In real world more serious problems are preventing human, fallen tree, accidised/non accidised trains, electric lines, all animals esp. elephants,cows/buffalos,bears, dog, monkey and rest animals from the jungle etc collision from train; broken track detection, landslide over track area, flood over track area, buckling/hogging. All of these situation require different type of action to prevent accident from happening. For example human/animal require horn; electric lines, trees fallen on track, landslide require emergency full power brakes; flood and buckling/hogging require slowing down as quick as possible. We noticed the requirement for such a model which can be used as train's pilot assistant and be fully automatic.
+No matter how hard we try to collect a large dataset we can only collect aprox. 4000 images. when divided we had 3600 train and 520 test images. train data is manually augmented using  scaling, cropping, rotation and translation. It is done manually because we wanted to extract as much information in terms of output images from previously mentioned operations. It was problemetic to esp. do automatic cropping due to expected issue that railway track might get cropped giving visual appearence of broken track, or crop animal or person standing near the railway track which we considered as peoples on track since manytimes these are the people that get accidised.
+After manual augmentation we got total of 46000 images. Test data was left untouched. Considering though augmented images are 46000 still they are featured from only 3600 images. We have to use transfer learning. Just using forward pass on pretrained models which usually give good generalised features, here didn't worked. Accuracy remained 68.0% using VGG19 and ResNet. So we finetuned various finetuned models keeping all layers trainable. The Best pretrained model with most generalization was Xception.
+Still single Xception seem to struggle to give good feature. So we changed our training procedure. This time instead of training a Xception model on 5 classes. We trained 5 Xceptions as follows:
+1. take class 1 vs class 2,3,4,5.
+2. Using Gamma Correction do colour based augmentation such that images in class 1 become almost equal to combined images in class 2,3,4,5.
+3.Train Xception as binary classifier to obtain correct classification for class 1 (yes we try to get finetuned Xception to accurately classify both classes but priority is to get correct classification for class 1).
+4. repeat steps 1,2,3 with now class 2 vs 1,3,4,5 and so on. Like this we got 5 Xceptions which were found to be better features. 
+It seems to us that since Xception1 is good for class 1 it give us promissing feature for class 1 at least. while Xceptions 2 to 5 will not give such feature if class 1 image is passed. It is 2 way benifit.
+Now when feature from each is concatenated the dense layers easily classified such features. And much higher accuracy is obtained 92.8%. The training dataset bottlenecked the improvement in accuracy when on training dataset accuracy reached 100.0%. To avoid overfitting we stoped training.
+
+Contribution
+A new way of obtaining good feature.
+A novel Dataset for automated train pilot assistant.
+A model that can automatically detect the railway track problems and avoid collisions and accidents. 
+
+usefulness
+1. Cheaper and faster than drone based or manual inspection.
+2. most real time since camera is attached on train itself.
+3. prevent lifes by avoiding accidents.
+
+Limitations and Future Works
+1. With this model all types of rail accidents can be prevented. Still we are taking images from perspective of camera set up above train. This camera can't detect minute cracks and joints in railway track. For this a train should be fitted with 2 camera system one above front and one below at the back(this will need light source since it is dark below train). Cracks and joint problem arrise over time. so when problem will start arrising the back camera of train would detect and report it to other trains coming at that route and also to maintainence authority.
+2. To stop train at least 1km distance is required. The distance is much and possibility of sharp turn(not sharp like on road, but sharp according to our camera system) is high in this distance. if such turn comes the train could be slowed down due to system but can't be fully stoped.
+3. Night time is also slightly problematic. Though we can use an additional IR camera as front camera at night.

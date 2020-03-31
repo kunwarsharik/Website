@@ -1,0 +1,23 @@
+Introduction
+An Optimal Vision-based Potential Derailment Detection System
+Koteswar Rao Jerripothula, Ph.D;Sharik Ali Ansari, B.Tech;Rahul Nijhawan, Ph.D;Ankush Mittal, Ph.D.
+Railway is cheapest mode of transportation in many countries. Due to harsh weather and also over the course of time the railway tracks become damaged.One type of damage is misallignment. Such misallignments can be lateral or longitudinal. The lateral misallignment is called Buckling and longitudinal misallignmenet is called hogging. These can be detected from a far distance. We need to detect them from a distance of at least 1 km away (which is required distance to stop a 22 wagon train), so that the train could be stoped or slowed down which is required to avoid accident. Human vision is limited and also due to constantly similar appearing view detection is difficult. Besides distraction also become cause for accidents. This model is self sufficient for buckling and hogging detection so can be used as assitant or actual driver if we consider only these rail defects. 
+
+Novelty and problems overcomed
+Earlier researchers suggested using drones to detect the defects of railway track. The method appear to works good (when drone fly close to the railway lines). Height can't be increased more than 3 Meter otherwise cracks won't be visible.  But in real life implementation, a clear scheme is hard to form and also very costly. For Example- where are we willing to station the drone: on the train or on railway stations since range of drone is limited (like DJI maveck pro: time of flight 30min and range 1 mile maximum). Also it dosen't matter whether you choose to use drone for checking railway tracks before or after the passage of train both have many disadvantages and can't prevent accidents. Best is to give train it's own camera system, which is most real time.
+
+From the perspective of detection of railway track defects we categorised defects in two categories (i) which can be detected from far distance.For example buckling, hogging etc (ii)which can only detected from close distance; wear and tear of track, cracks in track and corrugation. And we aim to detect all types of defect. In this paper we only limit our work to detect hogging and buckling vs no defect track.
+The idea is to used long range camera in front train to check the type one defect in real time. The image is processed by our model which output track is defective or not.
+
+Limitation is also the availability of data, may be because deep learning is never given a thought for these problems therefore large image data is never collected. We used various literature sources to collect images still we were only able to created medium sized dataset.
+
+Transfer learning is useful when dataset is in such range. So we used pretrained models for feature extraction. Then classifiers which have less parameters to train or set manually were used which include SVM,Random Forest, Naive Bayes, and ANNs etc. Extracted feature depend upon generlizing ability of pretrained model. Structure of model, parameters choosen, training procedures all contribute to generalizing ability. Therefore various pretrained models were tried and tested for obtaining optimal feature. When experimented features behave differently for different classifing algorithms. So various combinations were tested for our specific problem and the combination that is performing the best was choosen as our final model.
+
+Contributions
+A perspective to how we can approach the problems related to railway track related problems.
+A Dataset for Detection of buckling,hogging vs normal railway track.
+A Model for automated detection of Buckling and hogging.
+
+Limitation and Future Work
+The Problem of hogging and buckling must be detected far away, if curve comes and just ahead is buckling train will only get time to slow down not stop completely. If this solution is used either modern railway lines are to be constructed without sharp curves according to this method or to use mirrors or use drone specific to a train just for curves.
+In night time the normal camera won't work. Some IR based method should be added. 
