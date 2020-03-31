@@ -1,0 +1,112 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Sharik Projects</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<a href="index.html" class="logo">PROJECT PAGE</a>
+					</header>
+
+				<!-- Nav -->
+					<nav id="nav">
+						<ul class="links">
+							<li><a href="index.html">PROJECTS</a></li>
+							<li class="active"><a href="arduino_proj.html">INVENTIONS</a></li>
+							<li><a href="about2.html">ABOUT</a></li>
+						</ul>
+						<ul class="icons">
+							<!--li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li-->
+							<li><a href="javascript:void(0);" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+							<li><a href="javascript:void(0);" class="icon brands fa-linkedin"><span class="label">LinkedIn</span></a></li>
+							<li><a href="javascript:void(0);" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+						</ul>
+					</nav>
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Post -->
+							<section class="post">
+								<header class="major">
+									<!--span class="date">April 25, 2017</span-->
+									<h1>Preventing Computer vision syndrome<br />
+									using Machine Learning</h1>
+									<p>Contributors-Sharik Ali Ansari; Ankush Mittal.</p>
+								</header>
+								
+
+<div class="image main"><img src="images/pic04.jpg" alt="" /></div>
+
+<p>In today's era computers and smartphones have become an integral part of daily life. Apart from these, Television and other user friendly devices all use screens(LED,LCD etc). According to researchers any person who works on screen for regular period of 3 hrs or more (which is general) is under threat of his eyes getting damaged due to regularly focusing on a distance that our eyes are not made for (according to researchers the natural distance is 20-25 feet and the natural angle is slightly lower than horizontal), this damaging of our eyes and related effects come under the term Computer vision syndrome (CVS). The problem become much more important to solve when:</br>
+1. In cases of childrens of age below 10 years, they undergo this strain regularly but don't complain about it. Strain gets accumulated in their eyes across time resulting in various eye related problems. Though other factors can also be important this is one of the factors that even though both parents don't wear spectacles their child at such a small age wears them.</br>
+2. The increased strain in adults is also very common; multiple surveys in universities as well as professional places show above 75% people affected by this.</br>
+CVS has both short term and long term effects. Short term effects are eye dryness(which itself creates many eye related problems), eye fatigue, headache, reduced concentration. Medium term effects include blurry/double vision; Neck, shoulder and back pain while long term effects are depression, poor sleep quality and insomnia.</br> 
+Especially people who do professional work can't stop using screens but the way of using could be changed, and it is shown that by taking certain precautions we can actually protect our eyes. In this project we implemented a solution for CVS.</p>
+
+<h2>Novelty and problems overcomed</h2>
+<p>1. Figuring out how to approach the problem of eyes getting damaged from using screens. The features that we decided to work with were blinking rate, distance from the screen, eye(iris) movement, angle between the eye(horizontal) and screen top, resting period.</br>
+From various researches we summarized the optimal way of working with screens and automated it via detecting deviations from optimal way which is as follows-</br>
+Blinking rate: normal 12-15/minute which reduces to even 4/minute.</br>
+Distance from computer screen: 27-33 inch.</br>
+Eye movement more movement is better.</br>
+Angle between eye and top of screen: 15 degree.</br>
+Resting period is according to the 20-20-20 rule (every 20 minute look 20 feet away fro 20 seconds).</br>
+2. 68-point facial landmark detector from Dlib is used. Which gives us almost accurate points for eyes, lips, nose etc. The "almost" is handled using couple of hacks when needed.
+For Blinking Detection A Deep Convolutional Neural Network was trained to detect open vs close eye. For both preparing dataset and afterwhile taking prediction the landmark detector is used to get eye image from the complete face. Now to get accurate eye image the points we get the angle of rotation(roll) of face. and also calculate the width of the face from one eye corner to another. 
+A normal blink in a 15 frames per second video appears in 3 frames. Therefore to get the number of blinks in 1 minute, simple strategy of  taking video frame by frame is chosen. Eye close in consecutive frames is counted as one blink. Just like in a blink 3 frames are with eye close, similarly after a blink eye appears open for a couple of frames. Also there are sometimes two or more blinks consecutively they must be counted as one since the whole concept of eye blink is that blink refreshes the eye by coating it with a layer of tear. if we take 12-15 blink they must be distributed in a minute. The more uniformly distributed the blinks across a minute the better. Detecting frames with eyes closed and open fulfil such needs in our code.</br>
+
+3. Distance from screen is calculated using triangle similarity. Which requires an initial measurement of the object, we choose nose width for it. The nose width and the distance it was at that moment from the screen are measured only once. Then the width in pixels is obtained from points of the landmark detector. Using these we get focal length of camera. we store focal length and actual width of nose. Now by just getting width in pixels from the landmark detector, in images we can calculate the new distance of the object from the camera.</br>
+
+4. The Angle from the eye(horizontal) to screen is calculated using a virtual 3D face model obtained from 2D points of the landmark detector. This is implemented using openCV. Using this 3D model we calculate the pitch(angle) of the face from horizontal.</br>
+
+
+5. For iris movement detection only the eye part from the total face is extracted using the landmark detector as in blinking and a DCNN is trained. That outputs the “extent” to which the iris movement occured. The eyes must not focus at a specific point for long on the screen.</br>
+
+6. The resting period requires you to look 20 sec away or if for 20 sec no one is in front of the webcam that is also considered a resting period. This check is made every 20 minute. While the remaining four are calculated regularly.</br>
+
+At the end of a particular time period like a work, a day or a week your scores according to each behaviour’s  optimal way is given.</br></p>
+
+<h2>Contribution</h2>
+<p>1. Dataset for Blinking, iris movement.</br>
+2. Models to detect Blinking, iris movement.</br>
+3. Algorithm to calculate Distance of object from the screen, angle between eye (horizontal) and the screen and to check if the 20-20-20 rule is followed.<p>
+
+
+<h2>Usefulness</h2>
+<p>Until now, nobody from the computer vision community has worked over such an important issue. This can directly be deployed on laptops and computers with a webcam.</p>
+
+<h2>Limitation and Future prospective</h2>
+<p>Webcam should be in front of face (small deviation is allowed but not much). This can be overcomed by training new face landmark detector with training data including instances for side face pose also.</br>
+Can't work for smartphones. Small changes are required.</p>
+
+
+
+
+</section>
+</div><!-- Copyright -->
+		<div id="copyright">
+			<ul><li>&copy; Last Updated</li>
+				<li>18 Mar 2020</li>
+			</ul>
+		</div>
+</div>
+
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+</body></html>

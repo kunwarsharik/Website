@@ -1,0 +1,99 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Sharik Projects</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<a href="index.html" class="logo">PROJECT PAGE</a>
+					</header>
+
+				<!-- Nav -->
+					<nav id="nav">
+						<ul class="links">
+							<li><a href="index.html">PROJECTS</a></li>
+							<li class="active"><a href="arduino_proj.html">INVENTIONS</a></li>
+							<li><a href="about2.html">ABOUT</a></li>
+						</ul>
+						<ul class="icons">
+							<!--li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li-->
+							<li><a href="javascript:void(0);" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+							<li><a href="javascript:void(0);" class="icon brands fa-linkedin"><span class="label">LinkedIn</span></a></li>
+							<li><a href="javascript:void(0);" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+						</ul>
+					</nav>
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Post -->
+							<section class="post">
+								<header class="major">
+									<!--span class="date">April 25, 2017</span-->
+									<h1>Audio based Handgun vs<br />
+									Rifle Detection</h1>
+									<p>Contributors-Sharik Ali Ansari; Koteswar Rao Jerripothula, Ph.D;Rahul Nijhawan, Ph.D;Ankush Mittal, Ph.D.</p>
+								</header>
+					<div class="image main"><img src="images/pic06.jpg" alt="" /></div>
+
+<p>The military experts can easily tell which type of gun has fired the shot just by listening to its audio. Knowing which type of weapon your attacker is using gives you immense edge over him. For example the bullet from the famous rifle ak47 or ar15 could effectively hit up to 400m while from the glock 19 handgun only effective upto only 50m. Rifle like assault weapons require bulletproofing of level G2/G3, while handgun require G0/G1. Similar is for our Soldiers if they could know the type of weapon, they can find a suitable shield while faceoffs and can also use appropriate weapons against the enemy.</br>
+Usually the sound originated from gun shot consisting of sound due the bullet(for different types of bullet sound is different), powder charge,  different length barrel (same bullet will sound different for different length barrel).</p>
+
+<h2>Novelty and Problems Overcomed</h2>
+<p>Till now researchers have done much work over audio classification. We reviewed literature and obtained the techniques that various researchers have found. Some of them are MFCC, Differential MFCC, Tempogram, Spectrogram, root mean square value for audio sample, spectral centroid, PCA over spectrogram as well as raw audio etc. Over time different researches give us which type of feature works for which type of audio. Such a problem in which we need to classify very similar sounding audio and that too when audio is directly extracted in the wild where we have different types of noise mixed becomes a challenging task. We needed to generate handcrafted features, we tried and tested various combinations of these features to find which works best for our problem.</br>
+First problem is to obtain a dataset. Since the problem is new we don't have an already created dataset and we have to create our own. We used youtube for it. Over 350 useful videos were downloaded from which only 200 were really found to be useful.</br>
+We don't wanted to have 2 gun shot in one audio. We wanted to have one shot of handgun or one shot of rifle in an audio. One audio in dataset is basically one second audio file. In many videos the shots from gun are consecutive, so in some audio we have multiple shots, therefore we removed such audio files from our dataset. Now every audio in dataset is either an audio clip of one shot from handgun or one shot from rifle. Now most of gunshots from rifle(which are semi automatic or fully automatic) are very close. That is, in only one second we have multiple shots. We carefully took only those shots which are single. That's why many videos are left unused.</br>
+For extracting audios, first the markings of gunshot was done with accuracy upto milliseconds and were noted into a file. We tried our best to keep the gunshot centralised in this audio, because a gunshot is not only audio from fire that is a bullet leaving a gun and gun recoil but also the echo afterward. Then the video(.mp4) is converted into audio(.mp3). Using markings the gunshots were extracted.</br> Complete dataset was cross checked by listening.</br>
+Overall 9 types of features were tried combinations are as follows:</br>
+1. mfcc, tempogram.</br>
+2. mfcc, tempogram, spectrogram.</br>
+3. mfcc, dmfcc(differential mfcc), ddmfcc(double differential mfcc).</br>
+4. mfcc, spectrogram, chroma_cens, rms, spectral centroid, spectral bandwidth, spectral contrast, flatness, rolloff, tonnetz, zero crossing rate.</br>
+5. mfcc, spectrogram.</br>
+6. all features in 4 and additional tempogram.</br>
+7. mfcc.</br>
+8. tempogram.</br>
+9. mel spectrogram.</br>
+For classification purpose various algorithms were tried. But the DCNN were found to be working best. The accuracy obtained was 97.7%. While The Area under ROC curve was 99.0%</p>
+
+<h2>Contribution</h2>
+<p>We created the first dataset with audio from handgun and rifle, carefully compiled and labeled.</br>
+A fully automated deep learning based model as well as best handcrafted feature for best classification for this type of problem.</p>
+
+<h2>Usefulness</h2>
+<p>The model can help our miltary soldiers fighting terrorism and naxalites. They play guerilla war In which they hide and attack. Their weapons can't be visually analysed. So we only have audio based detection option. Once analysed accordingly counter strategy could be made like taking bullet proof vehicles and bullet proof clothing to shield themselves and taking much longer range weapons.</br>
+Can also be used at Night in dark.</p>
+
+<h2>Limitation and Future Work</h2>
+<p>The dataset was only of broad two categories: the handgun and rifles. The sound from these in real life is much more different then we have in our dataset because when youtubers edit video some features in audio get lost. Though we tried to get audio as close to original as possible still it's hard to get unedited audio. The loss of features is one major cause we only took these broad categories. If the dataset had been created on real audios the same model could have detected differences between even those guns which even experts can't tell without looking visually.</br>
+In Future an audio based model could be trained which could tell the type of gun even if someone had modified it.</p>
+
+
+
+</section>
+</div><!-- Copyright -->
+		<div id="copyright">
+			<ul><li>&copy; Last Updated</li>
+				<li>18 Mar 2020</li>
+			</ul>
+		</div>
+</div>
+
+<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+</body></html>
+

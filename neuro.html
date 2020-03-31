@@ -1,0 +1,101 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Sharik Projects</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<a href="index.html" class="logo">PROJECT PAGE</a>
+					</header>
+
+				<!-- Nav -->
+					<nav id="nav">
+						<ul class="links">
+							<li><a href="index.html">PROJECTS</a></li>
+							<li class="active"><a href="generic.html">INVENTIONS</a></li>
+							<li><a href="elements.html">ABOUT</a></li>
+						</ul>
+						<ul class="icons">
+							<!--li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li-->
+							<li><a href="javascript:void(0);" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+							<li><a href="javascript:void(0);" class="icon brands fa-linkedin"><span class="label">LinkedIn</span></a></li>
+							<li><a href="javascript:void(0);" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+						</ul>
+					</nav>
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Post -->
+							<section class="post">
+								<header class="major">
+									<!--span class="date">April 25, 2017</span-->
+									<h1>Eyes-based Detection of<br />
+									Neurological Disorders in Videos</h1>
+									<p>Authors-Sharik Ali Ansari; Koteswar Rao Jerripothula, Ph.D; Pragya Nagpal; Ankush Mittal.</p>
+								</header>
+								
+
+<div class="image main"><img src="images/pick.png" alt="" /></div>
+<h2>Introduction</h2>
+<p>Neurological disorders are disorders of nervous system. Some disorders are common like bell's palsy while others are less common like Blepharospasm and spasmodic torticollis. Common or not they cause a huge deal of inconvenience and suffering. Especially, when they are related to the eye which is our primary sense to observe our surroundings. For example blepharospasm renders a person visually disable due to uncontrolled eye closures, they can't even walk on stairs. While in Bell's palsy only one eye blink while other remain open and is somewhat paralysed which create a socially awkward situation due to which the patient generally hesitates to go to public places. Likewise spasmodic torticollis causes paralysis to the neck due to which it gets stuck to one side and person is unable to rotate it, due to which in order to look in front of him he has to turn his iris since he can't rotate his head. As we see all of these are very serious on part of patients their detection is extremely important.</p>
+
+
+<h2>Novelty and Problems Overcomed</h2>
+<p>Up until now from the above three disorders only on bell's palsy some work is found to be done. While on Blepharospasm and spasmodic torticollis no previous work was done.
+Due no such work, no datasets were available. So we created our own video dataset.</br>
+The bell's palsy detection in most earlier works try detection on images rather than video. While it is important to consider temporal features while detecting it which we did in this paper.
+the videos in dataset for each disorder were less to overcome this we tried following:</br>
+1. We know on a small dataset deep neural networks can't be trained to generalize neither over video nor over images. So we break the detection step into parts like in blepharospasm first blinking is detected (a DCNN is trained for this) then on those frames in which blinking is detected the tightness in blinks is measured (another DCNN is trained for this). further to see that these tight closures are of  blepharospasm length of closures(time) are measured and blinks not in that length(i.e shorter) are removed. On left blink tightness measurements the average tightness is calculated. And the feature obtained using this is Average length of blepharospasm blinks which is used for classification of video.</br> 
+For the first DCNN, the dataset for eye blink was created, but when this is used in an experiment to detect the tight eye blink it was not giving proper prediction. So with this blink detector more images in which eyes are tightly closed are added. This model is proved to be a good predictor for blink (with accuracy > 99.0%). The Second DCNN is actually an object detection model that gives us location of eight points on a closed eye. It was hard to train model on both open and closed eye it would require more image and location of points on them which is very hard to make. The model is trained to give these points such that when the eye is tightly closed their group difference(0,1,2,3,4 and 5,6,7) give a pretty good measure for eye tightness. These eight points are used to measure how tightly the eyes are shut while blink. Further the Average across video is taken as a feature representing that video for classification.</br>
+2. Similarly for bell's palsy we used the blinking model (DCNN) which is used above. And we calculated the difference in the number of eye blinks in both the eyes. It proved to be a good feature for bell's palsy detection.</br>
+Previously the researchers tried using the difference between both sides of the face (these researchers are doing classification on images so they can't take blinking) we found that majorly the researches were using lips drowsiness as it appear a good visual feature in image but we find many peoples who smile one sidedly. Their lips also appear that way consequently their face too. It is one of the reasons we based our project on videos.</br>
+3. Spasmodic torticollis (aka cervical dystonia), we were the first one to even consider classifying it. There are in total 4 types of dystonia. torticollis(neck rotation stuck in yaw),laterocollis(neck rotation stuck in roll), retrocollis (neck rotation stuck in positive pitch),antecollis(neck rotation stuck in negative pitch). Here we detected the Torticollis only since the other 3 require at least two cameras. And we kept one of our goals to detect only using a computer webcam.</br>
+First the rotation in roll, yaw and pitch were calculated using a virtual 3D face model which is generated from 2D input from camera using openCV. Using it the eye in opposite direction of rotation (yaw) on neck is obtained. Using blinking DCNN, all frames in which this eye is closed is removed and only frames with open eye is obtained. In this eye the position of iris is detected as iris in side of eye to which a person's neck is rotated or in the opposite direction of neck rotation.</br>
+A general rule is observed when a person looks at something which is at his sides. He rotates his neck a little and moves his iris a little. So a person who's neck is rotated say to the left side, if his iris is also in left it might be normal, but if in right it is not normal also it indicates a huge possibility he is forced to turn his neck away like he is forced due to this neurological disorder.
+So we took all those frames in which eyes are open and the rotation is above (15 degree left or right). If by any means the neck is getting rotated to say right one or two times but majority time it is in left, this possibility is also considered in code and majority direction is taken and minority direction rotation is removed. On the remaining frames the number of times the iris remained in opposite direction of rotation of neck vs in same direction is the final feature considered for classification of video.</br>
+the dataset for DCNN for iris location is created by us to train DCNN. The iris from almost the extreme opposite direction of rotation of neck vs iris in rest of the eye was classified in binary classification. Only near extreme direction is taken because eye appear that way when person try to look in opposite direction. Also when the neck is rotated to say left and iris appears in the middle of the eye he is only looking left and that can't be called abnormal. So only almost extreme vs other iris positions in the eye are considered.</br></p>
+
+
+<h2>Contributions</h2>
+<p>A Way to detect in videos when very less data is available.</br>
+A novel dataset for Blepharospasm, spasmodic torticollis and bell's palsy.</br>
+Models and novel features and algorithm to detect Blepharospasm, spasmodic torticollis and bell's palsy in video.</br>
+Considering that the machine learning community have worked much on other types of diseases and neurological disorders are also very important to detect and treat Our work can also help in bringing these disorders in front of our community to solve.</p>
+
+<h2>Usefulness</h2>
+<p>Fully automatic so can be used for basic detection of such disorders.</br>
+Our model doesn't require any extra equipment, only a webcam of your laptop is sufficient.</p>
+
+<h2>Limitation and prospective future work</h2>
+<p>It can be used only when the camera is at the center of the screen. Like in most laptops and computers. So it is general, and will need some modification if we want to deploy on say smartphones or laptops and computers with variable camera location.</br>
+With more than one camera option we can also detect other three types of Cervical Dystonia that are ,laterocollis, retrocollis and antecollis.</p>
+
+</section>
+</div><!-- Copyright -->
+		<div id="copyright">
+			<ul><li>&copy; Last Updated</li>
+				<li>18 Mar 2020</li>
+			</ul>
+		</div>
+</div>
+
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+</body></html>
+

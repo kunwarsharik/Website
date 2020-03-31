@@ -1,0 +1,97 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Sharik Projects</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<a href="index.html" class="logo">PROJECT PAGE</a>
+					</header>
+
+				<!-- Nav -->
+					<nav id="nav">
+						<ul class="links">
+							<li><a href="index.html">PROJECTS</a></li>
+							<li class="active"><a href="arduino_proj.html">INVENTIONS</a></li>
+							<li><a href="about2.html">ABOUT</a></li>
+						</ul>
+						<ul class="icons">
+							<!--li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li-->
+							<li><a href="javascript:void(0);" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+							<li><a href="javascript:void(0);" class="icon brands fa-linkedin"><span class="label">LinkedIn</span></a></li>
+							<li><a href="javascript:void(0);" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+						</ul>
+					</nav>
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Post -->
+							<section class="post">
+								<header class="major">
+									<!--span class="date">April 25, 2017</span-->
+									<h1>An optimal vision based<br />
+									Xtended Derailment System</h1>
+									<p>Koteswar Rao Jerripothula, Ph.D;Sharik Ali Ansari, B.Tech;Rahul Nijhawan, Ph.D;Ankush Mittal, Ph.D.</p>
+								</header>
+								
+
+<div class="image main"><img src="images/pic05.jpg" alt="" /></div>
+<p>Railways are the cheapest mode of transportation in many countries. This is Second part of our railway accident prevention effort. Due to harsh weather and also over the course of time the railway tracks become damaged. Earlier we tried to prevent accidents only due to Buckling and hogging.</p> 
+
+<h2>Novelty and Problems Overcomed</h2>
+<p>Till now only research conducted in the field of computer vision to detect the defect on railway track is limited to detecting corrugation on railway track, detecting cracks, insufficient gravel on the track etc. In the real world more serious problems are preventing human, fallen tree, accidised/non accidised trains, electric lines, all animals esp. elephants,cows/buffaloes,bears, dogs, monkeys and rest animals from the jungle etc, collision from train; broken track detection, landslide over track area, flood over track area, buckling/hogging. All of these situations require different types of action to prevent accidents from happening. For example human/animal require horn; electric lines, trees fallen on track, landslide require emergency full power brakes; flood and buckling/hogging require slowing down as quick as possible. We noticed the requirement for such a model which can be used as a train's pilot assistant and be fully automatic.</br>
+No matter how hard we try to collect a large dataset we can only collect aprox. 4000 images. When divided we had 3600 train and 520 test images. Train data is manually augmented using  scaling, cropping, rotation and translation. It is done manually because we wanted to extract as much information in terms of output images from previously mentioned operations. It was problematic to esp. do automatic cropping due to expected issue that railway track might get cropped giving visual appearance of broken track, or crop animal or person standing near the railway track which we considered as peoples on track since many times these are the people that get accidised.</br>
+After manual augmentation we got total of 46000 images. Test data was left untouched. Considering though augmented images are 46000 still they are featured from only 3600 images. We have to use transfer learning. Just using forward pass on pretrained models which usually give good generalised features, here didn't worked. Accuracy remained 68.0% using VGG19 and ResNet. So we finetuned various finetuned models keeping all layers trainable. The Best pretrained model with most generalization was Xception.</br>
+Still single Xception seems to struggle to give good features. So we changed our training procedure. This time instead of training a Xception model on 5 classes. We trained 5 Xceptions as follows:</br>
+1. take class 1 vs class 2,3,4,5.</br>
+2. Using Gamma Correction do colour based augmentation such that images in class 1 become almost equal to combined images in class 2,3,4,5.</br>
+3.Train Xception as binary classifier to obtain correct classification for class 1 (yes we try to get finetuned Xception to accurately classify both classes but priority is to get correct classification for class 1).</br>
+4. repeat steps 1,2,3 with now class 2 vs 1,3,4,5 and so on. Like this we got 5 Xceptions which were found to be better features.</br>
+It seems to us that since Xception1 is good for class 1 it give us promising feature for class 1 at least. While Xceptions 2 to 5 will not give such feature if class 1 image is passed. It is 2 way benefit.
+Now when a feature from each is concatenated the dense layers easily classified such features. And much higher accuracy is obtained 92.8%. The training dataset bottlenecked the improvement in accuracy when on training dataset accuracy reached 100.0%. To avoid overfitting we stopped training.</p>
+
+<h2>Contribution</h2>
+<p>A new way of obtaining good features.</br>
+A novel Dataset for automated “train pilot” assistant.</br>
+A model that can automatically detect the railway track problems and avoid collisions and accidents.</p>
+
+<h2>Usefulness</h2>
+<p>1. Cheaper and faster than drone based or manual inspection.</br>
+2. most real time since the camera is attached to the train itself.</br>
+3. prevent lifes by avoiding accidents.</p>
+
+<h2>Limitations and Future Works</h2>
+<p>1. With this model all types of rail accidents can be prevented. Still we are taking images from the perspective of camera setup above the train. This camera can't detect minute cracks and joints in railway tracks. For this a train should be fitted with 2 camera system one above front and one below at the back (this will need light source since it is dark below the train). Cracks and joint problem arise over time. So when problem will start arising the back camera of train would detect and report it to other trains coming at that route and also to maintenance authority.</br>
+2. To stop train at least 1km distance is required. The distance is much and the possibility of sharp turn (not sharp like on road, but sharp according to our camera system) is high in this distance. If such a turn comes the train could be slowed down due to the system but can't be fully stopped.</br>
+3. Night time is also slightly problematic. Though we can use an additional IR camera as a front camera at night.</p>
+
+
+
+</section>
+</div><!-- Copyright -->
+		<div id="copyright">
+			<ul><li>&copy; Last Updated</li>
+				<li>18 Mar 2020</li>
+			</ul>
+		</div>
+</div>
+<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+</body></html>
+

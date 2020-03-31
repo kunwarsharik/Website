@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Sharik Projects</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<a href="index.html" class="logo">PROJECT PAGE</a>
+					</header>
+
+				<!-- Nav -->
+					<nav id="nav">
+						<ul class="links">
+							<li><a href="index.html">PROJECTS</a></li>
+							<li class="active"><a href="arduino_proj.html">INVENTIONS</a></li>
+							<li><a href="about2.html">ABOUT</a></li>
+						</ul>
+						<ul class="icons">
+							<!--li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li-->
+							<li><a href="javascript:void(0);" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+							<li><a href="javascript:void(0);" class="icon brands fa-linkedin"><span class="label">LinkedIn</span></a></li>
+							<li><a href="javascript:void(0);" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+						</ul>
+					</nav>
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Post -->
+							<section class="post">
+								<header class="major">
+									<!--span class="date">April 25, 2017</span-->
+									<h1>Detection of Riots/Violence<br />
+									from Live videos</h1>
+									<p>Contributors-Sharik Ali Ansari; Koteswar Rao Jerripothula, Ph.D;Rahul Nijhawan, Ph.D;Ankush Mittal, Ph.D.;</p>
+								</header>
+								
+
+<div class="image main"><img src="images/pic07.jpg" alt="" /></div>
+<p>Almost every part of the world today is facing problem of violence in some kind or the other. In many countries violence is directed towards minorities restricting their freedom. Problem is with authorities which do not get information regarding violence spread. Hence we propose a Solution using which we can automatically detect where the violence is happening and take appropriate steps.</p>
+
+<h2>Novelty and Problems Solved</h2>
+<p>Among 5 methods to approach the video based detection, in this project we used 3 dimensional Convolutional networks. We used the end to end training strategy to obtain a classifier that can generalize the action of violence like one person or a group of peoples attacking another person or other peoples. The method was found to work good and gave accuracy of 90.033% and higher on various datasets.</br>
+The Dataset used in this is obtained from kaggle, the dataset is publically available with the name real life violence detection. No work yet was found to be done on this dataset till date i am writing this post. There were 2000 videos 1000 that contain violence and 1000 that don't contain violence. Among these some videos are extremely lengthy we removed those videos from the dataset, remaining videos were 998 from violence and 999 from non violence totalling up to 1997 videos.</br>
+The main problem was to choose the depth for images in 3 dimensional CNN. Since these 3d dataset consume a lot of memory. Our system is 25GB Ram yet we can't take images in all 3 channels. When we were normalising the image the memory outrun quickly. So we  converted RGB images into Grayscale images.And also the size of images was reduced from (224,224,3) to (145,145,1). Each video had different lengths ranging from 3 sec to 600 second. But generally videos were of duration 3 sec to 10 sec. Also the video has fights in random locations. So we decided to take video frames at a regular interval of 2,3 or 4. When it was decided that we will have depth equal to 60 depending on the amount of data in the dataset. We thought to also take advantage of longer videos that have more data. We divided the number of frames in the video by 2, 3,and 4. Whichever resulting number is close to 60 we chose that as the interval between each frame we take from video. Example if we have 130 frames, we divide it by 2 (that is take 1 frame gap)which is near 60 compared to others. if we had 170 frames we would have used 2 frames gap. To fulfill 60 frames for the remaining frames black padding as a frame is added. The Result is a grey image sequence with 60 frames each of size 145x145.</br>
+Due to small training data the only a small portion of 15% is used as test data. The data is also not much for training so we tried to keep as few trainable parameters in CNN as possible. To find such a model is also challenging which is both small and works best for the problem. This is solved by try and test method, and finally an optimal model is obtained.</p>
+
+<h2>Contribution</h2>
+<p>Till now this project is under work. But at present also the baseline model we created using 3Dimensinal CNN which is further optimised using trial and test is also pretty good for this problem.</p>    
+
+<h2>Usefulness</h2>
+<p>At the current stage This model can detect the violence scene with accuracy of above 90.033%. Hence can be used in automated violence detection. The thing which makes it useful is also that there are no such models for detection of violence.</p>
+
+<h2>Limitation and Ongoing Work</h2>
+<p>Apart from video, audio is also very important to detect if someone is threatening somebody. Sometimes just video is not enough.</br>
+We want to evolve it to detect and understand what exactly leads to fights and violence. We hope such information will be of immense use.</p>
+
+</section>
+</div><!-- Copyright -->
+		<div id="copyright">
+			<ul><li>&copy; Last Updated</li>
+				<li>18 Mar 2020</li>
+			</ul>
+		</div>
+</div>
+<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+</body></html>
+
